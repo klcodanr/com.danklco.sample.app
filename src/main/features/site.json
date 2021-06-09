@@ -1,0 +1,8 @@
+{
+    "bundles": [
+        {
+            "id": "com.danklco.sample:app:${project.version}",
+            "start-order": "20"
+        }
+    ]
+}

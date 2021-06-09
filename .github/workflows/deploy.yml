@@ -1,0 +1,68 @@
+# Deploys code updates to my personal site on push to the master branch
+name: Deploy on Push
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - uses: s4u/maven-settings-action@v2.3.0
+      with:
+        servers: '[{"id": "github", "username": "klcodanr", "password": "${{ secrets.GH_PAT }}"}]'
+        apacheSnapshots: true
+        sonatypeSnapshots: true
+    - name: Build
+      run: mvn install -B
+    - name: Get Current Release Time
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y.%m.%d-%H%M')"
+    - name: Set Version
+      run: |
+        git config user.name "Github Actions"
+        git config user.email github-actions@github.com
+        mvn versions:set -DnewVersion=${RELEASE}
+        git add pom.xml
+        git commit pom.xml -m "Updating track release ${RELEASE}"
+        git tag ${RELEASE}
+        git push origin main
+        git push origin HEAD:main --tags
+      env:
+        RELEASE: ${{ steps.date.outputs.date }}
+    - name: Create GitHub Release
+      uses: actions/create-release@v1
+      with:
+        tag_name: ${{ steps.date.outputs.date }}
+        release_name: Release ${{ steps.date.outputs.date }}
+        body: ${{ steps.tag_version.outputs.changelog }}
+      env:
+        RELEASE: ${{ steps.date.outputs.date }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Publish Release Package
+      run: mvn clean deploy -B -Pci
+    - name: Cleanup Old Packages
+      id: remove-package-versions
+      uses: epitomeglobal/remove-package-versions@master
+      with:
+        keep-prerelease-versions: 2
+        keep-versions: 2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+    - name: Trigger Infra Release
+      run: |
+        curl --location --request POST 'https://api.github.com/repos/klcodanr/com.danklco.sample.infra/actions/workflows/5206380/dispatches' \
+          --header 'Authorization: Bearer ${{ secrets.GH_PAT }}' \
+          --header 'Content-Type: application/json' \
+        --data-raw '{
+            "ref": "main",
+            "inputs": {
+                "PROJECT": "APP_VERSION",
+                "VERSION": "${{ steps.date.outputs.date }}"
+            }
+        }'
