@@ -1,9 +1,9 @@
-# Deploys code updates to my personal site on push to the master branch
 name: Deploy on Push
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 jobs:
   deploy:
     runs-on: ubuntu-latest
