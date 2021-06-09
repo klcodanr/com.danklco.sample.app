@@ -45,7 +45,7 @@ jobs:
         RELEASE: ${{ steps.date.outputs.date }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Publish Release Package
-      run: mvn clean deploy -B -Pci
+      run: mvn clean deploy -B
     - name: Cleanup Old Packages
       id: remove-package-versions
       uses: epitomeglobal/remove-package-versions@master
