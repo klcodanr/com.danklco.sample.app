@@ -8,7 +8,7 @@ License. -->
 
   <groupId>com.danklco.sample</groupId>
   <artifactId>app</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>2021.06.09-0353</version>
   <name>sample</name>
   <description>sample Sling CMS Project</description>
 
