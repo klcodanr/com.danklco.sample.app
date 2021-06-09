@@ -46,17 +46,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Publish Release Package
       run: mvn clean deploy -B
-    - name: Cleanup Old Packages
-      id: remove-package-versions
-      uses: epitomeglobal/remove-package-versions@master
-      with:
-        keep-prerelease-versions: 2
-        keep-versions: 2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_PAT }}
     - name: Trigger Infra Release
       run: |
-        curl --location --request POST 'https://api.github.com/repos/klcodanr/com.danklco.sample.infra/actions/workflows/5206380/dispatches' \
+        curl --location --request POST 'https://api.github.com/repos/klcodanr/com.danklco.sample.infra/actions/workflows/10161415/dispatches' \
           --header 'Authorization: Bearer ${{ secrets.GH_PAT }}' \
           --header 'Content-Type: application/json' \
         --data-raw '{
