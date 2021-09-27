@@ -25,7 +25,7 @@ import org.apache.sling.models.annotations.Model;
 @Model(adaptables={Resource.class})
 public class HelloWorldModel {
 
-	public String getMessage(){
-    return "Hello World!";
+  public String getMessage(){
+    return "Hello World! Is it me, you're looking for?";
   }
 }
