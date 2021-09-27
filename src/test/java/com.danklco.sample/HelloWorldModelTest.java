@@ -39,6 +39,6 @@ public class HelloWorldModelTest {
     public void testModel() {
         HelloWorldModel model = context.currentResource().adaptTo(HelloWorldModel.class);
         assertNotNull(model);
-        assertEquals("Hello World!", model.getMessage());
+        assertEquals("Hello World! Is it me, you're looking for?", model.getMessage());
     }
 }
