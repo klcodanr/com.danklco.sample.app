@@ -19,13 +19,20 @@
  <%@include file="/libs/sling-cms/global.jsp"%>
 <body>
   <sling:call script="/libs/sling-cms/components/editor/scripts/init.jsp" />
-  <header>
-    <sling:adaptTo adaptable="${resource}" adaptTo="com.danklco.sample.HelloWorldModel" var="helloWorld" />
-    <sling:encode value="${helloWorld.message}" mode="HTML" />
-  </header>
-  <main role="main" class="container">
+  <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">Sample App</a>
+  </nav>
+  <main role="main" class="container my-5">
+    <p>
+      <sling:adaptTo adaptable="${resource}" adaptTo="com.danklco.sample.HelloWorldModel" var="helloWorld" />
+      <sling:encode value="${helloWorld.message}" mode="HTML" />
+    </p>
     <sling:include path="container" resourceType="sling-cms/components/general/container"/>
   </main>
-  <footer>Not Yet Updated for AdaptTo 2021</footer>
+  <footer class="p-5 my-5 bg-secondary text-white">
+    <div class="container">
+      Not Yet Updated for AdaptTo 2021
+    </div>
+  </footer>
   <sling:call script="/libs/sling-cms/components/editor/scripts/finalize.jsp" />
 </body>
