@@ -31,7 +31,7 @@
   </main>
   <footer class="p-5 my-5 bg-secondary text-white">
     <div class="container">
-      Not Yet Updated for AdaptTo 2021
+      Updated for AdaptTo 2021
     </div>
   </footer>
   <sling:call script="/libs/sling-cms/components/editor/scripts/finalize.jsp" />
