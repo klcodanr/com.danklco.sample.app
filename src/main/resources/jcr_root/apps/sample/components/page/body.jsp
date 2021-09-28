@@ -19,9 +19,11 @@
  <%@include file="/libs/sling-cms/global.jsp"%>
 <body>
   <sling:call script="/libs/sling-cms/components/editor/scripts/init.jsp" />
-  <main role="main" class="container">
+  <header>
     <sling:adaptTo adaptable="${resource}" adaptTo="com.danklco.sample.HelloWorldModel" var="helloWorld" />
     <sling:encode value="${helloWorld.message}" mode="HTML" />
+  </header>
+  <main role="main" class="container">
     <sling:include path="container" resourceType="sling-cms/components/general/container"/>
   </main>
   <footer>Not Yet Updated for AdaptTo 2021</footer>
