@@ -24,6 +24,6 @@
     <sling:encode value="${helloWorld.message}" mode="HTML" />
     <sling:include path="container" resourceType="sling-cms/components/general/container"/>
   </main>
-  <footer>Updated for ResolveConf</footer>
+  <footer>Updated for AdaptTo 2021</footer>
   <sling:call script="/libs/sling-cms/components/editor/scripts/finalize.jsp" />
 </body>
