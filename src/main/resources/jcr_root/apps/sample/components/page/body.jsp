@@ -19,7 +19,7 @@
  <%@include file="/libs/sling-cms/global.jsp"%>
 <body>
   <sling:call script="/libs/sling-cms/components/editor/scripts/init.jsp" />
-  <nav class="navbar navbar-light bg-light">
+  <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Sample App</a>
   </nav>
   <main role="main" class="container my-5">
